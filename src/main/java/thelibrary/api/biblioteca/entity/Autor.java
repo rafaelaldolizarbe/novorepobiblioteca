@@ -2,10 +2,10 @@ package thelibrary.api.biblioteca.entity;
 
 
 import lombok.*;
+import thelibrary.api.biblioteca.dto.autor.DadosCadastroAutor;
 import thelibrary.api.biblioteca.entity.enumerable.GeneroLiterario;
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Table(name = "autor")
 @Entity(name = "Autor")
@@ -26,6 +26,14 @@ public class Autor {
 
     @Embedded
     private Contato contato;
+
+    public Autor(DadosCadastroAutor dados) {
+        this.nome = dados.nome();
+        this.dataNascimento = dados.dataNascimento();
+        this.nacionalidade = dados.nacionalidade();
+        this.generoLiterario = dados.generoLiterario();
+        this.contato = new Contato(dados.contato());
+    }
 
 //    @OneToMany(mappedBy = "escritor")
 //    List<Livro> livros;
