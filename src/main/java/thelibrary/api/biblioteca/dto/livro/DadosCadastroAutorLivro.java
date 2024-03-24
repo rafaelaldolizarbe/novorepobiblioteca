@@ -1,6 +1,6 @@
 package thelibrary.api.biblioteca.dto.livro;
 
-import thelibrary.api.biblioteca.entity.GeneroLiterario;
+import thelibrary.api.biblioteca.entity.enumerable.GeneroLiterario;
 
 import java.time.LocalDate;
 
