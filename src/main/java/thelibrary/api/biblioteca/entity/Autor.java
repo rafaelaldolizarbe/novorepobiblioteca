@@ -3,7 +3,7 @@ package thelibrary.api.biblioteca.entity;
 
 import lombok.*;
 import thelibrary.api.biblioteca.dto.autor.DadosCadastroAutor;
-import thelibrary.api.biblioteca.entity.enumerable.GeneroLiterario;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -16,7 +16,7 @@ import java.time.LocalDate;
 public class Autor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Indica que o valor do ID será gerado automaticamente.
-    private Integer id;
+    private Long id;
     private String nome;
     private LocalDate dataNascimento;
     private String nacionalidade;

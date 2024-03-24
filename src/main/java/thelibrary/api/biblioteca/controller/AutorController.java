@@ -13,14 +13,13 @@ import thelibrary.api.biblioteca.repository.autor.AutorRepository;
 @RequestMapping("/autores")
 public class AutorController  {
     @Autowired
-    private AutorRepository autorRepository;
+    private AutorRepository repository;
     @PostMapping // Anotação para atribuir funcionalidades do método post na função que segue
-    public void cadastrar(
-            @RequestBody DadosCadastroAutor dados
+    public void cadastrar(@RequestBody DadosCadastroAutor dados
 //            @RequestBody String json // Considerar que isto é importante pois é outra anotação que refere o que virá a ser recebido no corpo de requisição. É muitíssimo válido não esquecer dessas informações
     ){
 
-        autorRepository.save(new Autor(dados));
+        repository.save(new Autor(dados));
 
     }
 }
