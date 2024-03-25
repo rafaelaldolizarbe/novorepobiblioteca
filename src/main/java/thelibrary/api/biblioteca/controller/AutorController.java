@@ -4,6 +4,8 @@ package thelibrary.api.biblioteca.controller;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import thelibrary.api.biblioteca.dto.autor.DadosCadastroAutor;
 import thelibrary.api.biblioteca.dto.autor.DadosConsultaAutor;
@@ -28,8 +30,13 @@ public class AutorController  {
     }
     @GetMapping
     public List<DadosConsultaAutor> listar(){
-        List<Autor> autores = repository.findAll();
-        List<DadosConsultaAutor> listagem = autores.stream().map(DadosConsultaAutor::new).toList();
-        return listagem;
+//        List<Autor> autores = repository.findAll();
+//        List<DadosConsultaAutor> listagem = autores.stream().map(DadosConsultaAutor::new).toList();
+//        return listagem;
+        return repository.findAll().stream().map(DadosConsultaAutor::new).toList();
+    }
+    @GetMapping("/paginacao")
+    public Page<DadosConsultaAutor> listar(Pageable paginacao){
+        return repository.findAll(paginacao).map(DadosConsultaAutor::new);
     }
 }

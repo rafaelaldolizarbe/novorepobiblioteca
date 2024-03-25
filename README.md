@@ -6,6 +6,10 @@ Neste contexto a abordagem visa a utilização de migrations para persistência 
 
 Como Banco de dados temos o MySQL como banco de persistência padrão e o h2 como banco de teste. 
 
+## Uso de pageable
+
+Neste contexto de desenvolvimento é possível  encontrar recursos de paginação . O que facilita bastante o lado do desenvolvimento front-end.
+
 ## Tecnologias utilizadas
 
 - Java 17
