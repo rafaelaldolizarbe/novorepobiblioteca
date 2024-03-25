@@ -4,13 +4,13 @@ package thelibrary.api.biblioteca.controller;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import thelibrary.api.biblioteca.dto.autor.DadosCadastroAutor;
+import thelibrary.api.biblioteca.dto.autor.DadosConsultaAutor;
 import thelibrary.api.biblioteca.entity.Autor;
 import thelibrary.api.biblioteca.repository.autor.AutorRepository;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/autores")
@@ -25,5 +25,11 @@ public class AutorController  {
 
         repository.save(new Autor(dados));
 
+    }
+    @GetMapping
+    public List<DadosConsultaAutor> listar(){
+        List<Autor> autores = repository.findAll();
+        List<DadosConsultaAutor> listagem = autores.stream().map(DadosConsultaAutor::new).toList();
+        return listagem;
     }
 }
