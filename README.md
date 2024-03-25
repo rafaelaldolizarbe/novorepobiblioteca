@@ -18,3 +18,33 @@ Neste contexto de desenvolvimento é possível  encontrar recursos de paginaçã
 - Flyway
 - JUnit
 - H2
+
+## Docker
+
+Para subir o banco de dados MySQL, você pode configurar o container isolado utilizando um dockerfile seguindo os seguintes parâmetros. 
+
+```dockerfile
+FROM mysql
+
+ENV MYSQL_ROOT_PASSWORD=[senha_do_banco] \ 
+    MYSQL_DATABASE=[nome_do_banco] 
+
+    
+EXPOSE 3306
+```
+Crie a imagem com o comando abaixo:
+
+```shell
+docker build -t [nome_da_imagem] .
+```
+
+
+Com a imagem criada é possível instanciar o banco de dados com o comando abaixo:
+
+```shell
+docker run --name [nome_do_container] -v [caminho_do_host/nome_do_volume]:/var/lib/mysql --rm -e MYSQL_ROOT_PASSWORD=[senha_do_banco] -p 3306:3306 -d [nome_da_imagem]
+```
+
+Importante ressaltar que o volume apesar de ser opcional é importante para persistir os dados do banco de dados independente do container ser excluido. Isso pode também garantir a possibilidade de realizar o backup dos dados e posteriormente reutilizar em outro ambiente. Tal como uma EC2 na AWS.    
+
+Outra consideração que deve-se deixar clara é o uso do `--rm` que garante que o container seja excluido após a finalização do processo. Muito útil para realização de testes.
