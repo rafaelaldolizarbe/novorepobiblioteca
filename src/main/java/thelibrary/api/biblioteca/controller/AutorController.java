@@ -1,6 +1,8 @@
 package thelibrary.api.biblioteca.controller;
 
 
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +18,8 @@ public class AutorController  {
     @Autowired
     private AutorRepository repository;
     @PostMapping // Anotação para atribuir funcionalidades do método post na função que segue
-    public void cadastrar(@RequestBody DadosCadastroAutor dados
+    @Transactional // Anotação para que o método seja executado dentro de uma transação
+    public void cadastrar(@RequestBody @Valid DadosCadastroAutor dados
 //            @RequestBody String json // Considerar que isto é importante pois é outra anotação que refere o que virá a ser recebido no corpo de requisição. É muitíssimo válido não esquecer dessas informações
     ){
 

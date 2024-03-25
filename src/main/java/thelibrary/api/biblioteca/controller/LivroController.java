@@ -13,6 +13,6 @@ public class LivroController {
 
     @GetMapping
     public String cumprimentos(){
-        return "Está funcionando mesmo";
+        return "Está funcionando";
     }
 }

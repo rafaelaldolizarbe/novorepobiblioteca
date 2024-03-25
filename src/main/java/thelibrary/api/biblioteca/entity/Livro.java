@@ -20,17 +20,13 @@ public class Livro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NotNull
     private String titulo;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "autor_id")
     private Autor autor;
-
-    @NotNull
     private Integer anoPublicacao;
     private String editora;
     private GeneroLiterario genero;
-    @ISBN
     private String isbn;
 
 }
