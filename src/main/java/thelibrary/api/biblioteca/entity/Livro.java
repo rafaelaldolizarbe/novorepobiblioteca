@@ -19,7 +19,7 @@ import thelibrary.api.biblioteca.entity.enumerable.GeneroLiterario;
 public class Livro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String titulo;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "autor_id")

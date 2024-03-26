@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
+import thelibrary.api.biblioteca.dto.autor.DadosAtualizacaoAutor;
 import thelibrary.api.biblioteca.dto.autor.DadosCadastroAutor;
 import thelibrary.api.biblioteca.dto.autor.DadosConsultaAutor;
 import thelibrary.api.biblioteca.entity.Autor;
@@ -36,6 +37,10 @@ public class AutorController  {
 //        return listagem;
         return repository.findAll().stream().map(DadosConsultaAutor::new).toList();
     }
+    @GetMapping("/logico")
+    public Page<DadosConsultaAutor> consultaLogica(Pageable paginacao){
+        return repository.findAllByAtivoTrue(paginacao).map(DadosConsultaAutor::new);
+    }
     @GetMapping("/paginacao") // Se achar nescessário pode realizar mais consultas relativas a isto no site do Spring Data JPA procurando por Pageable.
     public Page<DadosConsultaAutor> listar(Pageable paginacao){
         return repository.findAll(paginacao).map(DadosConsultaAutor::new);
@@ -44,6 +49,25 @@ public class AutorController  {
     @GetMapping("/ordenado") // Neste exemplo usa-se o @PageableDefault para ordenar por nome. Ele é uma anotação que serve para definir valores padrão para a paginação.
     public Page<DadosConsultaAutor> buscar(@PageableDefault(sort = {"nome"}) Pageable paginacao){
         return repository.findAll(paginacao).map(DadosConsultaAutor::new);
+    }
+    @PutMapping
+    @Transactional
+    public void atualizar(@RequestBody @Valid DadosAtualizacaoAutor dados){
+        Autor autor = repository.getReferenceById(dados.id());
+        autor.atualizar(dados);
+
+    }
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluir(@PathVariable Long id){
+        repository.deleteById(id);
+    }
+
+    @DeleteMapping("/logico/{id}")
+    @Transactional
+    public void desativar(@PathVariable Long id){
+        Autor autor = repository.getReferenceById(id);
+        autor.desativar();
     }
 
 }

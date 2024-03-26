@@ -1,6 +1,7 @@
 package thelibrary.api.biblioteca.entity;
 
 
+import thelibrary.api.biblioteca.dto.autor.DadosAtualizacaoAutor;
 import thelibrary.api.biblioteca.dto.autor.DadosCadastroAutor;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,7 +21,7 @@ import java.time.LocalDate;
 public class Autor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Indica que o valor do ID será gerado automaticamente.
-    private Integer id;
+    private Long id;
     private String nome;
     private LocalDate dataNascimento;
     private String nacionalidade;
@@ -30,6 +31,8 @@ public class Autor {
 
     @Embedded
     private Contato contato;
+    private Boolean ativo;
+
 
     public Autor(DadosCadastroAutor dados) {
         this.nome = dados.nome();
@@ -37,6 +40,23 @@ public class Autor {
         this.nacionalidade = dados.nacionalidade();
         this.generoLiterario = dados.generoLiterario();
         this.contato = new Contato(dados.contato());
+        this.ativo = true;
+    }
+
+
+    public void atualizar(DadosAtualizacaoAutor dados) {
+        if (dados.nome() != null) {
+            this.nome = dados.nome();
+        }
+        if (dados.nacionalidade() != null) {
+            this.nacionalidade = dados.nacionalidade();
+        }
+        //Faz sentido usar a função acima para substituir uma característica caso o campo seja preenchido, mas não faz sentido para o generoLiterario, pois o generoLiterario é um Enum e não pode ser nulo.
+
+    }
+
+    public void desativar() {
+        this.ativo = false;
     }
 
 //    @OneToMany(mappedBy = "escritor")
