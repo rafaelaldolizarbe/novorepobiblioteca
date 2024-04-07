@@ -1,3 +1,7 @@
+# Primeira Parte do Curso de Spring Boot realizado na Alura Concluído
+
+Esta branch engloba além do projeto de biblioteca baseado no curso de spring boot da alura ,a implementação de um banco de dados MySQL com o docker focando principalmente no recurso volume do docker para posteriormente implementar em uma instância de computação em núvem. Isso garante que quaisquer cargas realizadas nas etapas de testes podem ou não persistir em um ambiente de produção. 
+
 # Projeto Biblioteca
 
 Este projeto está passando por uma atualização é baseado no exercício que foi publicado anteriormente.
