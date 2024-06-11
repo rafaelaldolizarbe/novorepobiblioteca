@@ -1,4 +1,4 @@
-package thelibrary.api.biblioteca.controller;
+package thelibrary.api.biblioteca.controller.autor;
 
 
 import jakarta.transaction.Transactional;
@@ -14,7 +14,7 @@ import thelibrary.api.biblioteca.dto.autor.DadosAtualizacaoAutor;
 import thelibrary.api.biblioteca.dto.autor.DadosCadastroAutor;
 import thelibrary.api.biblioteca.dto.autor.DadosConsultaAutor;
 import thelibrary.api.biblioteca.dto.autor.DadosDetalhamentoAutor;
-import thelibrary.api.biblioteca.entity.Autor;
+import thelibrary.api.biblioteca.entity.autor.Autor;
 import thelibrary.api.biblioteca.repository.autor.AutorRepository;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package thelibrary.api.biblioteca.entity;
+package thelibrary.api.biblioteca.entity.contato;
 
 import thelibrary.api.biblioteca.dto.autor.DadosContato;
 import jakarta.persistence.Embeddable;

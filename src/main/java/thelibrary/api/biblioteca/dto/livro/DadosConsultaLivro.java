@@ -1,6 +1,6 @@
 package thelibrary.api.biblioteca.dto.livro;
 
-import thelibrary.api.biblioteca.entity.Livro;
+import thelibrary.api.biblioteca.entity.livro.Livro;
 
 public record DadosConsultaLivro(
         String titulo,

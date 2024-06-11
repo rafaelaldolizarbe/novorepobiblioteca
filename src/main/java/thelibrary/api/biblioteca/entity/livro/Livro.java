@@ -1,4 +1,4 @@
-package thelibrary.api.biblioteca.entity;
+package thelibrary.api.biblioteca.entity.livro;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

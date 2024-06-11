@@ -1,4 +1,4 @@
-package thelibrary.api.biblioteca.entity;
+package thelibrary.api.biblioteca.entity.autor;
 
 
 import thelibrary.api.biblioteca.dto.autor.DadosAtualizacaoAutor;
@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import thelibrary.api.biblioteca.entity.contato.Contato;
 import thelibrary.api.biblioteca.entity.enumerable.GeneroLiterario;
 
 import java.time.LocalDate;

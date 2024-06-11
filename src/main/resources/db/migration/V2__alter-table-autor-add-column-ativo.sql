@@ -1,2 +1,3 @@
-alter table autor add column ativo tinyint;
-update autor set ativo = 1;
+ALTER TABLE autor ADD COLUMN ativo TINYINT;
+
+UPDATE autor SET ativo = 1;

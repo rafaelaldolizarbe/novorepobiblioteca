@@ -1,4 +1,4 @@
-package thelibrary.api.biblioteca.controller;
+package thelibrary.api.biblioteca.controller.livro;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import thelibrary.api.biblioteca.dto.livro.DadosAtualizarLivro;
 import thelibrary.api.biblioteca.dto.livro.DadosCadastrarLivro;
 import thelibrary.api.biblioteca.dto.livro.DadosConsultaLivro;
-import thelibrary.api.biblioteca.entity.Livro;
+import thelibrary.api.biblioteca.entity.livro.Livro;
 import thelibrary.api.biblioteca.repository.livro.LivroRepository;
 
 import java.util.List;

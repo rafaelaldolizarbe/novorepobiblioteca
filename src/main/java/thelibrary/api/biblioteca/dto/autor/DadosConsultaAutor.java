@@ -1,6 +1,6 @@
 package thelibrary.api.biblioteca.dto.autor;
 
-import thelibrary.api.biblioteca.entity.Autor;
+import thelibrary.api.biblioteca.entity.autor.Autor;
 import thelibrary.api.biblioteca.entity.enumerable.GeneroLiterario;
 
 public record DadosConsultaAutor(
