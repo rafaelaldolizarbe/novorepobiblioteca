@@ -11,6 +11,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Data
@@ -20,9 +21,9 @@ import java.time.LocalDateTime;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class Book {
-
+//TO DO - Implementation of the AuditorAware interface to get the current user and set it in the createdBy and lastModifiedBy fields, respectively. Test the implementation and set a test Class whit JUnit 5.
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String author;
     private String isbn;
@@ -32,7 +33,7 @@ public class Book {
             nullable = false,
             updatable = false
     )
-    private LocalDateTime createDate;
+    private Instant createDate;
 
     @LastModifiedDate
     @Column(insertable = false)
