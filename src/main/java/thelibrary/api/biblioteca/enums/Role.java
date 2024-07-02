@@ -1,4 +1,4 @@
-package thelibrary.api.biblioteca.entity.enumerable;
+package thelibrary.api.biblioteca.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static thelibrary.api.biblioteca.entity.enumerable.Permission.*;
+import static thelibrary.api.biblioteca.enums.Permission.*;
 
 @RequiredArgsConstructor
 public enum Role {

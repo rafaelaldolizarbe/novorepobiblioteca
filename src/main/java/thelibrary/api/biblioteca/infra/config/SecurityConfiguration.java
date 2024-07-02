@@ -16,9 +16,9 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 import static org.springframework.http.HttpMethod.*;
 import static org.springframework.http.HttpMethod.DELETE;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
-import static thelibrary.api.biblioteca.entity.enumerable.Permission.*;
-import static thelibrary.api.biblioteca.entity.enumerable.Role.ADMIN;
-import static thelibrary.api.biblioteca.entity.enumerable.Role.MANAGER;
+import static thelibrary.api.biblioteca.enums.Permission.*;
+import static thelibrary.api.biblioteca.enums.Role.ADMIN;
+import static thelibrary.api.biblioteca.enums.Role.MANAGER;
 
 @Configuration
 @EnableWebSecurity

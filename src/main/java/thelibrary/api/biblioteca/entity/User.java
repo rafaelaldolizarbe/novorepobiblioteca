@@ -1,4 +1,4 @@
-package thelibrary.api.biblioteca.entity.user;
+package thelibrary.api.biblioteca.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,8 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import thelibrary.api.biblioteca.entity.enumerable.Role;
-import thelibrary.api.biblioteca.entity.token.Token;
+import thelibrary.api.biblioteca.enums.Role;
 
 import java.util.Collection;
 import java.util.List;

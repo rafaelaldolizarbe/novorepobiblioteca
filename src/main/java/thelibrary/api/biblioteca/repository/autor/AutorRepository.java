@@ -2,7 +2,7 @@ package thelibrary.api.biblioteca.repository.autor;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import thelibrary.api.biblioteca.entity.autor.Autor;
+import thelibrary.api.biblioteca.entity.Autor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AutorRepository extends JpaRepository<Autor, Long> {

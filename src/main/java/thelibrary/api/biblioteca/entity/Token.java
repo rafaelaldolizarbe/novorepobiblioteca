@@ -1,12 +1,11 @@
-package thelibrary.api.biblioteca.entity.token;
+package thelibrary.api.biblioteca.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import thelibrary.api.biblioteca.entity.enumerable.TokenType;
-import thelibrary.api.biblioteca.entity.user.User;
+import thelibrary.api.biblioteca.enums.TokenType;
 
 @Data
 @Builder

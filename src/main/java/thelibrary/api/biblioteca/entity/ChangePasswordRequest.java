@@ -1,4 +1,4 @@
-package thelibrary.api.biblioteca.entity.user;
+package thelibrary.api.biblioteca.entity;
 
 import lombok.Builder;
 import lombok.Getter;

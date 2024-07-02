@@ -1,15 +1,14 @@
-package thelibrary.api.biblioteca.entity.autor;
+package thelibrary.api.biblioteca.entity;
 
 
-import thelibrary.api.biblioteca.dto.autor.DadosAtualizacaoAutor;
-import thelibrary.api.biblioteca.dto.autor.DadosCadastroAutor;
+import thelibrary.api.biblioteca.dto.autor.AutorAtualizacaoDto;
+import thelibrary.api.biblioteca.dto.autor.AutorCadastroDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import thelibrary.api.biblioteca.entity.contato.Contato;
-import thelibrary.api.biblioteca.entity.enumerable.GeneroLiterario;
+import thelibrary.api.biblioteca.enums.GeneroLiterario;
 
 import java.time.LocalDate;
 
@@ -35,7 +34,7 @@ public class Autor {
     private Boolean ativo;
 
 
-    public Autor(DadosCadastroAutor dados) {
+    public Autor(AutorCadastroDto dados) {
         this.nome = dados.nome();
         this.dataNascimento = dados.dataNascimento();
         this.nacionalidade = dados.nacionalidade();
@@ -45,7 +44,7 @@ public class Autor {
     }
 
 
-    public void atualizar(DadosAtualizacaoAutor dados) {
+    public void atualizar(AutorAtualizacaoDto dados) {
         if (dados.nome() != null) {
             this.nome = dados.nome();
         }

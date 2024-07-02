@@ -1,4 +1,4 @@
-package thelibrary.api.biblioteca.entity.enumerable;
+package thelibrary.api.biblioteca.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

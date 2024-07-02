@@ -1,7 +1,7 @@
 package thelibrary.api.biblioteca.repository.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import thelibrary.api.biblioteca.entity.user.User;
+import thelibrary.api.biblioteca.entity.User;
 
 import java.util.Optional;
 

@@ -1,15 +1,13 @@
-package thelibrary.api.biblioteca.entity.livro;
+package thelibrary.api.biblioteca.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.ISBN;
-import thelibrary.api.biblioteca.dto.livro.DadosAtualizarLivro;
-import thelibrary.api.biblioteca.dto.livro.DadosCadastrarLivro;
-import thelibrary.api.biblioteca.entity.enumerable.GeneroLiterario;
+import thelibrary.api.biblioteca.dto.livro.LivroAtualizacaoDto;
+import thelibrary.api.biblioteca.dto.livro.LivroCadastroDto;
+import thelibrary.api.biblioteca.enums.GeneroLiterario;
 
 
 @Table(name = "livro")
@@ -32,7 +30,7 @@ public class Livro {
     private String isbn;
     private Boolean ativo;
 
-    public Livro(DadosCadastrarLivro livro) {
+    public Livro(LivroCadastroDto livro) {
         this.titulo = livro.titulo();
         this.autor = livro.autor();
         this.anoPublicacao = livro.anoPublicacao();
@@ -42,7 +40,7 @@ public class Livro {
         this.ativo=true;
     }
 
-    public void atualizar(DadosAtualizarLivro dados) {
+    public void atualizar(LivroAtualizacaoDto dados) {
         if (dados.titulo() != null) {
             this.titulo = dados.titulo();
         }

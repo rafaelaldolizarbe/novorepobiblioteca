@@ -1,4 +1,4 @@
-package thelibrary.api.biblioteca.entity.book;
+package thelibrary.api.biblioteca.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

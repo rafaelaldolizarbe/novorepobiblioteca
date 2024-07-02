@@ -1,10 +1,10 @@
-package thelibrary.api.biblioteca.entity.user;
+package thelibrary.api.biblioteca.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import thelibrary.api.biblioteca.entity.enumerable.Role;
+import thelibrary.api.biblioteca.enums.Role;
 
 @Data
 @Builder

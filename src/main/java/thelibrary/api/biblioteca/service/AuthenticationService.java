@@ -9,12 +9,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import thelibrary.api.biblioteca.entity.enumerable.TokenType;
-import thelibrary.api.biblioteca.entity.token.Token;
-import thelibrary.api.biblioteca.entity.user.AuthenticationRequest;
-import thelibrary.api.biblioteca.entity.user.AuthenticationResponse;
-import thelibrary.api.biblioteca.entity.user.RegisterRequest;
-import thelibrary.api.biblioteca.entity.user.User;
+import thelibrary.api.biblioteca.enums.TokenType;
+import thelibrary.api.biblioteca.entity.Token;
+import thelibrary.api.biblioteca.entity.AuthenticationRequest;
+import thelibrary.api.biblioteca.entity.AuthenticationResponse;
+import thelibrary.api.biblioteca.entity.RegisterRequest;
+import thelibrary.api.biblioteca.entity.User;
 import thelibrary.api.biblioteca.repository.token.TokenRepository;
 import thelibrary.api.biblioteca.repository.user.UserRepository;
 

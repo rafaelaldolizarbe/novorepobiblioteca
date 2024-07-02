@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import thelibrary.api.biblioteca.entity.user.User;
-import thelibrary.api.biblioteca.entity.user.ChangePasswordRequest;
+import thelibrary.api.biblioteca.entity.User;
+import thelibrary.api.biblioteca.entity.ChangePasswordRequest;
 import thelibrary.api.biblioteca.repository.user.UserRepository;
 
 import java.security.Principal;

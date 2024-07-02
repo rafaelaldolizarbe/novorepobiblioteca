@@ -1,13 +1,13 @@
 package thelibrary.api.biblioteca.dto.autor;
 
 import jakarta.validation.constraints.NotNull;
-import thelibrary.api.biblioteca.entity.autor.Autor;
-import thelibrary.api.biblioteca.entity.contato.Contato;
-import thelibrary.api.biblioteca.entity.enumerable.GeneroLiterario;
+import thelibrary.api.biblioteca.entity.Autor;
+import thelibrary.api.biblioteca.entity.Contato;
+import thelibrary.api.biblioteca.enums.GeneroLiterario;
 
 import java.time.LocalDate;
 
-public record DadosDetalhamentoAutor(
+public record AutorDetalhamentoDto(
     Long id,
     LocalDate dataNascimento,
     @NotNull
@@ -16,7 +16,7 @@ public record DadosDetalhamentoAutor(
     GeneroLiterario generoLiterario,
     Contato contato
 ) {
-    public DadosDetalhamentoAutor (Autor autor) {
+    public AutorDetalhamentoDto(Autor autor) {
         this(autor.getId(),autor.getDataNascimento(),autor.getNome(), autor.getNacionalidade(), autor.getGeneroLiterario(), autor.getContato());
     }
 }

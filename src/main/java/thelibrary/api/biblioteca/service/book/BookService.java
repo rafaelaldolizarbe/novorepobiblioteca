@@ -2,8 +2,8 @@ package thelibrary.api.biblioteca.service.book;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import thelibrary.api.biblioteca.entity.book.Book;
-import thelibrary.api.biblioteca.entity.book.BookRequest;
+import thelibrary.api.biblioteca.entity.Book;
+import thelibrary.api.biblioteca.dto.book.BookRequest;
 import thelibrary.api.biblioteca.repository.book.BookRepository;
 
 import java.util.List;

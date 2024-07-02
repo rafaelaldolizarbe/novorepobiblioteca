@@ -1,6 +1,6 @@
-package thelibrary.api.biblioteca.entity.contato;
+package thelibrary.api.biblioteca.entity;
 
-import thelibrary.api.biblioteca.dto.autor.DadosContato;
+import thelibrary.api.biblioteca.dto.autor.AutorContatoDto;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,7 +19,7 @@ public class Contato {
     private String site;
     private Boolean disponibilidadeDeEventos;
 
-    public Contato(DadosContato contato) {
+    public Contato(AutorContatoDto contato) {
         this.email = contato.email();
         this.enderecoPostal = contato.enderecoPostal();
         this.telefone = contato.telefone();

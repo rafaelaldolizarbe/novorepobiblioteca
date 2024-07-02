@@ -1,11 +1,9 @@
 package thelibrary.api.biblioteca.dto.autor;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import org.hibernate.validator.constraints.URL;
 
-public record DadosContato(
+public record AutorContatoDto(
 
     @NotBlank
     String email,

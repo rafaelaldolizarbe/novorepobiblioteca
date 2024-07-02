@@ -1,4 +1,4 @@
-package thelibrary.api.biblioteca.entity.book;
+package thelibrary.api.biblioteca.dto.book;
 
 import lombok.Builder;
 import lombok.Getter;

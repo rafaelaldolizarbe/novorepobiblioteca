@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import thelibrary.api.biblioteca.entity.user.AuthenticationRequest;
-import thelibrary.api.biblioteca.entity.user.AuthenticationResponse;
-import thelibrary.api.biblioteca.entity.user.RegisterRequest;
+import thelibrary.api.biblioteca.entity.AuthenticationRequest;
+import thelibrary.api.biblioteca.entity.AuthenticationResponse;
+import thelibrary.api.biblioteca.entity.RegisterRequest;
 import thelibrary.api.biblioteca.service.AuthenticationService;
 
 import java.io.IOException;
