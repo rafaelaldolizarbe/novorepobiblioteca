@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import thelibrary.api.biblioteca.dto.livro.LivroAtualizacaoDto;
 import thelibrary.api.biblioteca.dto.livro.LivroCadastroDto;
@@ -28,8 +29,13 @@ public class LivroController {
         livroRepository.save(new Livro(livro));
     }
     @GetMapping("/logico")
-    public Page<LivroConsultaDto> listarAtivo(Pageable paginacao){
-        return livroRepository.findAllByAtivoTrue(paginacao).map(LivroConsultaDto::new);
+    public ResponseEntity<Page<LivroConsultaDto>> listarAtivo(Pageable paginacao){
+
+        var response =livroRepository.findAllByAtivoTrue(paginacao).map(LivroConsultaDto::new);
+        if (response.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(response);
     }
     @GetMapping("/paginacao")
     public Page<LivroConsultaDto> listar(Pageable paginacao){
@@ -52,6 +58,7 @@ public class LivroController {
     public void atualizar(@RequestBody @Valid LivroAtualizacaoDto dados){
         Livro livro = livroRepository.getReferenceById(dados.id());
         livro.atualizar(dados);
+        livroRepository.save(livro);
 
     }
 

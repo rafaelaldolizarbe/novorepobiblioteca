@@ -1,19 +1,17 @@
 package thelibrary.api.biblioteca.entity;
 
 
+import lombok.*;
 import thelibrary.api.biblioteca.dto.autor.AutorAtualizacaoDto;
 import thelibrary.api.biblioteca.dto.autor.AutorCadastroDto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import thelibrary.api.biblioteca.enums.GeneroLiterario;
 
 import java.time.LocalDate;
 
 @Table(name = "autor")
 @Entity(name = "Autor")
+@Builder
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor

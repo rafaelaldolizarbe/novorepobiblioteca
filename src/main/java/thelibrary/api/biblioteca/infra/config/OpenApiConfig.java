@@ -14,7 +14,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
         info = @Info(
                 contact = @Contact(
                         name = "Rafael",
-                        email = "rafael.lizarbe95@gmail.com.com"
+                        email = "rafael.lizarbe95@gmail.com"
                 ),
                 description = "OpenApi documentation for Spring Security",
                 title = "OpenApi specification - Rafael",

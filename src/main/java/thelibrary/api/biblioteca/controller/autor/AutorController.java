@@ -30,7 +30,7 @@ public class AutorController  {
         repository.save(autor);
 
         var uri = uriBuilder
-                .path("/medicos/{id}")
+                .path("/autores/{id}")
                 .buildAndExpand(autor
                         .getId()).toUri();
 
