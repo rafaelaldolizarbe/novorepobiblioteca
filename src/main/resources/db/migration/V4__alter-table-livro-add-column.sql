@@ -1,2 +1,3 @@
-alter table livro add column ativo tinyint;
-update livro set ativo = 1;
+ALTER TABLE livro ADD COLUMN ativo TINYINT;
+
+UPDATE livro SET ativo = 1;

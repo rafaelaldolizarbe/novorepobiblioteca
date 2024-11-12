@@ -3,11 +3,13 @@ package thelibrary.api.biblioteca.dto.autor;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import thelibrary.api.biblioteca.entity.enumerable.GeneroLiterario;
+import lombok.Builder;
+import thelibrary.api.biblioteca.enums.GeneroLiterario;
 
 import java.time.LocalDate;
 
-public record DadosCadastroAutor(
+@Builder
+public record AutorCadastroDto(
         @NotBlank
         String nome,
         @NotNull
@@ -16,6 +18,6 @@ public record DadosCadastroAutor(
         GeneroLiterario generoLiterario,
         @NotBlank
         String nacionalidade,
-        @NotNull @Valid DadosContato contato
+        @NotNull @Valid AutorContatoDto contato
 ) {
 }

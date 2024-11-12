@@ -1,12 +1,9 @@
-create table livro (
-
-    id bigint not null auto_increment primary key,
-    titulo varchar(100) not null,
-    autor varchar(100) not null,
-    ano_publicacao int not null,
-    editora varchar(100) not null,
-    genero varchar(100) not null,
-    isbn varchar(100) not null
-
-
+CREATE TABLE livro (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(100) NOT NULL,
+    autor VARCHAR(100) NOT NULL,
+    ano_publicacao INT NOT NULL,
+    editora VARCHAR(100) NOT NULL,
+    genero VARCHAR(100) NOT NULL,
+    isbn VARCHAR(100) NOT NULL
 );

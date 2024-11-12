@@ -2,7 +2,7 @@ package thelibrary.api.biblioteca.dto.livro;
 
 import jakarta.validation.constraints.NotNull;
 
-public record DadosAtualizarLivro(
+public record LivroAtualizacaoDto(
         @NotNull
         Long id,
         String titulo,
