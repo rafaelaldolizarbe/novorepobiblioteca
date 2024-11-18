@@ -3,6 +3,13 @@ spring:
     url: jdbc:mysql://localhost/my_library
     username: root
     password: root
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+logging:
+  level:
+    org:
+      flywaydb: DEBUG
+#  flyway:
+#    enabled: false
 
 jpa:
   show-sql: true
