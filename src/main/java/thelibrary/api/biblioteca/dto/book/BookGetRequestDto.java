@@ -2,6 +2,9 @@ package thelibrary.api.biblioteca.dto.book;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import thelibrary.api.biblioteca.dto.literaryGenre.LiteraryGenreCreateDto;
+import thelibrary.api.biblioteca.dto.literaryGenre.LiteraryGenreResponseDto;
+import thelibrary.api.biblioteca.dto.publisherProvider.PublisherProviderResponseDto;
 import thelibrary.api.biblioteca.entity.LiteraryGenre;
 import thelibrary.api.biblioteca.entity.PublisherProvider;
 
@@ -12,9 +15,9 @@ public record BookGetRequestDto(
         @NotBlank
         String isbn,
         @NotNull
-        LiteraryGenre literaryGenre,
+        LiteraryGenreResponseDto literaryGenre,
         @NotNull
-        PublisherProvider publisherProvider,
+        PublisherProviderResponseDto publisherProvider,
         @NotNull
         LocalDate publicationDate,
         @NotBlank

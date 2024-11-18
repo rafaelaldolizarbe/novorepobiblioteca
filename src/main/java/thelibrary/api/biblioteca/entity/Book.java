@@ -32,7 +32,7 @@ public class Book {
     private LocalDate publicationDate;
 
     @ManyToOne(
-            fetch = FetchType.EAGER
+            fetch = FetchType.LAZY
     )
     @JoinColumn(
             name = "literary_genre_id",
@@ -41,7 +41,7 @@ public class Book {
     private LiteraryGenre literaryGenre;
 
     @ManyToOne(
-            fetch = FetchType.EAGER
+            fetch = FetchType.LAZY
     )
     @JoinColumn(
             name = "publisher_id",
