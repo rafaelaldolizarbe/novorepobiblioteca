@@ -3,6 +3,8 @@ package thelibrary.api.biblioteca.controller.book;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+import thelibrary.api.biblioteca.dto.book.BookGetRequestDto;
 import thelibrary.api.biblioteca.entity.Book;
 import thelibrary.api.biblioteca.dto.book.BookRequest;
 import thelibrary.api.biblioteca.service.book.BookService;
@@ -18,14 +20,22 @@ public class BookController {
 
     @PostMapping
     public ResponseEntity<?> save(
-            @RequestBody BookRequest request
-    ) {
-        service.save(request);
-        return ResponseEntity.accepted().body(request);
+            @RequestBody BookRequest request, UriComponentsBuilder uriBuilder
+            ) {
+
+        Book savedBook = service.save(request);
+        var uri = uriBuilder
+                .path("/api/v1/books/{id}")
+                .buildAndExpand(
+                        savedBook.getId())
+                .toUri();
+        return ResponseEntity.created(uri).body(request);
     }
 
     @GetMapping
-    public ResponseEntity<List<Book>> findAllBooks() {
-        return ResponseEntity.ok(service.findAll());
+    public ResponseEntity<List<BookGetRequestDto>> findAllBooks() {
+        List<BookGetRequestDto> books = service.findAll();
+
+        return ResponseEntity.ok(books);
     }
 }

@@ -1,6 +1,7 @@
 package thelibrary.api.biblioteca.infra.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
@@ -19,12 +20,12 @@ import thelibrary.api.biblioteca.repository.user.UserRepository;
 @Configuration
 @RequiredArgsConstructor
 public class ApplicationConfig {
-
-    private final UserRepository repository;
+    @Autowired
+    private final UserRepository repo;
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> repository.findByEmail(username)
+        return username -> repo.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 

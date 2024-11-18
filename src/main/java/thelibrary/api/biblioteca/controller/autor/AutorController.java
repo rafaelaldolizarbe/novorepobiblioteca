@@ -23,7 +23,7 @@ public class AutorController  {
     private AutorRepository repository;
     @PostMapping // Anotação para atribuir funcionalidades do método post na função que segue
     @Transactional // Anotação para que o método seja executado dentro de uma transação
-    public ResponseEntity cadastrar(@RequestBody @Valid AutorCadastroDto dados, UriComponentsBuilder uriBuilder
+    public ResponseEntity<?> cadastrar(@RequestBody @Valid AutorCadastroDto dados, UriComponentsBuilder uriBuilder
 //            @RequestBody String json // Considerar que isto é importante pois é outra anotação que refere o que virá a ser recebido no corpo de requisição. É muitíssimo válido não esquecer dessas informações
     ){
         Autor autor = new Autor(dados);
