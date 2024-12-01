@@ -1,16 +1,15 @@
-create table autor(
-
-    id bigint not null auto_increment primary key,
-    nome varchar(100) not null,
-    data_nascimento date not null,
-    nacionalidade varchar(100) not null,
-    genero_literario varchar(100) not null,
-    email varchar(100) not null unique,
-    endereco_postal varchar(100) not null,
-    telefone varchar(11) not null,
-    numero varchar(20),
-    preferencia_de_contato varchar(100),
-    rede_social varchar(200),
-    site varchar(100),
-    disponibilidade_de_eventos boolean not null
+CREATE TABLE autor (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    data_nascimento DATE NOT NULL,
+    nacionalidade VARCHAR(100) NOT NULL,
+    genero_literario VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    endereco_postal VARCHAR(100) NOT NULL,
+    telefone VARCHAR(11) NOT NULL,
+    numero VARCHAR(20),
+    preferencia_de_contato VARCHAR(100),
+    rede_social VARCHAR(200),
+    site VARCHAR(100),
+    disponibilidade_de_eventos BOOLEAN NOT NULL
 );
