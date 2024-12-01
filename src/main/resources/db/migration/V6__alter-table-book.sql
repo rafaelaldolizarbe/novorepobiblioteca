@@ -25,12 +25,23 @@ CREATE TABLE literary_genre (
 
 
 -- Alteração da tabela de Livro
-ALTER TABLE book
-    ADD COLUMN title VARCHAR(200) NOT NULL,
-    ADD COLUMN publication_date DATE,
-    ADD COLUMN literary_genre_id INT,
-    ADD COLUMN publisher_id INT,
-    DROP COLUMN author,
-    ADD FOREIGN KEY (literary_genre_id) REFERENCES literary_genre(id),
-    ADD FOREIGN KEY (publisher_id) REFERENCES publisher(id),
-    MODIFY COLUMN create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL UNIQUE;
+CREATE TABLE IF NOT EXISTS book (
+    id INT NOT NULL AUTO_INCREMENT,
+    created_by INT,
+    last_modified_by INT,
+    create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    last_modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    isbn VARCHAR(13),
+    title VARCHAR(200) NOT NULL,
+    publication_date DATE,
+    literary_genre_id INT,
+    publisher_id INT,
+    active BOOLEAN DEFAULT TRUE,
+    INDEX (literary_genre_id),
+    INDEX (publisher_id),
+    FOREIGN KEY (literary_genre_id) REFERENCES literary_genre(id),
+    FOREIGN KEY (publisher_id) REFERENCES publisher(id),
+    PRIMARY KEY (id)
+);
+
+

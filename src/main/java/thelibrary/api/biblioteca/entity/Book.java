@@ -16,6 +16,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Builder
@@ -75,6 +76,17 @@ public class Book {
     @Column(nullable = false)
     private String title;
 
+    @ManyToMany(
+            fetch = FetchType.LAZY
+    )
+    @JoinTable(
+            name = "book_writer",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "writer_id")
+    )
+    private List<Writer> writers;
+
+    private Boolean active;
     public Book(BookRequest bookRequest) {
         this.isbn = bookRequest.isbn();
         this.publicationDate = bookRequest.publicationDate();

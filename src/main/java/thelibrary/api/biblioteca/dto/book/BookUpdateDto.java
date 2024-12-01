@@ -1,5 +1,7 @@
 package thelibrary.api.biblioteca.dto.book;
 
+import thelibrary.api.biblioteca.entity.Book;
+
 import java.time.LocalDate;
 
 public record BookUpdateDto(
@@ -12,4 +14,7 @@ public record BookUpdateDto(
 
 
 ) {
+    public BookUpdateDto(Book response) {
+        this(response.getId(), response.getIsbn(), response.getLiteraryGenre().getId(), response.getPublisherProvider().getId(), response.getPublicationDate(), response.getTitle());
+    }
 }

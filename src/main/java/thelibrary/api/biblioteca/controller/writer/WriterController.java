@@ -9,6 +9,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import thelibrary.api.biblioteca.dto.writer.WriterCreateRequestDto;
 import thelibrary.api.biblioteca.dto.writer.WriterRequestDto;
 import thelibrary.api.biblioteca.dto.writer.WriterResponseDto;
 import thelibrary.api.biblioteca.entity.Writer;
@@ -17,7 +18,7 @@ import thelibrary.api.biblioteca.service.writer.WriterService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/writers")
+@RequestMapping("/api/v1/writers")
 public class WriterController {
 
     @Autowired
@@ -25,13 +26,13 @@ public class WriterController {
 
     @PostMapping
     public ResponseEntity<?> save(
-            @RequestBody @Valid WriterRequestDto request , UriComponentsBuilder uriBuilder
+            @RequestBody @Valid WriterCreateRequestDto request , UriComponentsBuilder uriBuilder
     ) {
 
         Writer savedWriter = service.save(request);
 
         var uri = uriBuilder
-                .path("/api/v1/literary-genres/{id}")
+                .path("/api/v1/writers/{id}")
                 .buildAndExpand(
                         savedWriter.getId())
                 .toUri();
@@ -49,16 +50,16 @@ public class WriterController {
         }
         return ResponseEntity.ok(resposta);
     }
-//    @GetMapping("/{id}")
-//    public ResponseEntity<WriterResponseDto> detalhar(@PathVariable Integer id){
-//        WriterResponseDto writer = service.findById(id);
-//        return ResponseEntity.ok(writer);
-//    }
+    @GetMapping("/{id}")
+    public ResponseEntity<WriterResponseDto> detalhar(@PathVariable Integer id){
+        WriterResponseDto writer = service.findById(id);
+        return ResponseEntity.ok(writer);
+    }
 
 
     @GetMapping("/logico")
     public ResponseEntity<Page<WriterResponseDto>> consultaLogica(Pageable paginacao){
-        Page<WriterResponseDto> resposta = service.findAllByAtivoTrue(paginacao);
+        Page<WriterResponseDto> resposta = service.findAllByActiveTrue(paginacao);
         return ResponseEntity.ok(resposta);
     }
     @GetMapping("/paginacao") // Se achar nescessário pode realizar mais consultas relativas a isto no site do Spring Data JPA procurando por Pageable.
@@ -72,26 +73,29 @@ public class WriterController {
         Page<WriterResponseDto> resposta = service.findAllPageable(pagina);
         return ResponseEntity.ok(resposta);
     }
-//    @PutMapping
-//    @Transactional
-//    public ResponseEntity atualizar(@RequestBody @Valid AutorAtualizacaoDto dados){
-//        Autor autor = service.getReferenceById(dados.id());
-//        autor.atualizar(dados);
-//        return ResponseEntity.ok(new AutorDetalhamentoDto(autor));
-//
-//    }
-//    @DeleteMapping("/{id}")
-//    @Transactional
-//    public ResponseEntity excluir(@PathVariable Long id){
-//        service.deleteById(id);
-//        return ResponseEntity.noContent().build();
-//    }
-//
-//    @DeleteMapping("/logico/{id}")
-//    @Transactional
-//    public ResponseEntity desativar(@PathVariable Long id){
-//        Autor autor = service.getReferenceById(id);
-//        autor.desativar();
-//        return ResponseEntity.noContent().build();
-//    }
+    @PutMapping
+    @Transactional
+    public ResponseEntity<Writer> atualizar(@RequestBody @Valid WriterRequestDto dados){
+        Writer writer = service.getReferenceById(dados.id());
+        if (writer == null){
+            return ResponseEntity.notFound().build();
+        }
+        Writer responsedata = service.update(dados);
+        return ResponseEntity.ok(responsedata);
+
+    }
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<?> excluir(@PathVariable Integer id){
+        service.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/logico/{id}")
+    @Transactional
+    public ResponseEntity<Writer> desativar(@PathVariable Integer id){
+        Writer writer = service.getReferenceById(id);
+        Writer response=service.desativar(writer.getId());
+        return ResponseEntity.status(204).body(response);
+    }
 }

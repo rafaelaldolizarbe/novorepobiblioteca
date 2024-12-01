@@ -10,12 +10,12 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import thelibrary.api.biblioteca.dto.autor.AutorCadastroDto;
+import thelibrary.api.biblioteca.dto.writer.WriterRequestDto;
 import thelibrary.api.biblioteca.dto.writer.WriterResponseDto;
-
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.List;
+
 
 @Data
 @Builder
@@ -33,6 +33,8 @@ public class Writer {
     private String lastName;
     private LocalDate birthDate;
     private LocalDate deathDate;
+    private Boolean active;
+
     @Column(
             nullable = false,
             columnDefinition = "TEXT"
@@ -62,12 +64,28 @@ public class Writer {
     @Column(insertable = false)
     private Integer lastModifiedBy;
 
+    @ManyToMany(
+            mappedBy = "writers"
+            ,fetch = FetchType.LAZY
+    )
+    private List<Book> books;
+
+    public Writer(WriterRequestDto dados) {
+        this.firstName = dados.firstName();
+        this.lastName = dados.lastName();
+        this.birthDate = dados.birthDate();
+        this.deathDate = dados.deathDate();
+        this.description = dados.description();
+        this.active = dados.active();
+    }
+
     public Writer(WriterResponseDto dados) {
         this.firstName = dados.firstName();
         this.lastName = dados.lastName();
         this.birthDate = dados.birthDate();
         this.deathDate = dados.deathDate();
-
+        this.description = dados.description();
+        this.active = dados.active();
 //        this.ativo = true;
     }
 }
