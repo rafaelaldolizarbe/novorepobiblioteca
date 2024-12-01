@@ -24,13 +24,3 @@ CREATE TABLE IF NOT EXISTS token
         ON DELETE NO ACTION,
     CHECK (token_type = 'BEARER')
 );
-CREATE TABLE IF NOT EXISTS book (
-    created_by INT,
-    id INT NOT NULL AUTO_INCREMENT,
-    last_modified_by INT,
-    create_date TIMESTAMP NOT NULL UNIQUE,
-    last_modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    author VARCHAR(255),
-    isbn VARCHAR(255),
-    PRIMARY KEY (id)
-);

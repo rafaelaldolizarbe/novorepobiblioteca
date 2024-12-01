@@ -6,18 +6,21 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import thelibrary.api.biblioteca.dto.book.BookGetRequestDto;
+import thelibrary.api.biblioteca.dto.book.BookUpdateDto;
 import thelibrary.api.biblioteca.dto.literaryGenre.LiteraryGenreResponseDto;
 import thelibrary.api.biblioteca.dto.publisherProvider.PublisherProviderResponseDto;
 import thelibrary.api.biblioteca.entity.Book;
 import thelibrary.api.biblioteca.dto.book.BookRequest;
 import thelibrary.api.biblioteca.entity.LiteraryGenre;
 import thelibrary.api.biblioteca.entity.PublisherProvider;
+import thelibrary.api.biblioteca.entity.Writer;
 import thelibrary.api.biblioteca.repository.book.BookRepository;
 import thelibrary.api.biblioteca.repository.literaryGenre.LiteraryGenreRepository;
 import thelibrary.api.biblioteca.repository.publisherProvider.PublisherRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -37,7 +40,10 @@ public class BookService {
     public PublisherProvider getPublisherProviderByBookItemFk(Integer fk) {
         return publisherRepository.findById(fk).orElseThrow(() -> new EntityNotFoundException("Publisher not found"));
     }
-
+    public Book saveonly( Book book) {
+        repository.save(book);
+        return book;
+    }
     public Book save(BookRequest request) {
         LiteraryGenre literaryGenre = getLiteraryGenreByBookItemFk(request.literaryGenreId());
         PublisherProvider publisherProvider = getPublisherProviderByBookItemFk(request.publisherProviderId());
@@ -52,6 +58,45 @@ public class BookService {
         repository.save(book);
         return book;
     }
+    public Optional<Book> getReferenceById(Integer id) {
+        if (repository.findById(id).isEmpty()) {
+            throw new EntityNotFoundException("Book not found");
+        }
+        return repository.findById(id);
+    }
+
+    public Book atualizar(BookUpdateDto dados) {
+        Optional<Book> book = getReferenceById(dados.id());
+        if (book.isEmpty()) {
+            throw new EntityNotFoundException("Book not found");
+        }
+        if(dados.literaryGenreId()!=null)
+        {
+            LiteraryGenre literaryGenre = getLiteraryGenreByBookItemFk(dados.literaryGenreId());
+            book.get().setLiteraryGenre(literaryGenre);
+        }
+        if(dados.publisherProviderId()!=null) {
+            PublisherProvider publisherProvider = getPublisherProviderByBookItemFk(dados.publisherProviderId());
+            book.get().setPublisherProvider(publisherProvider);
+        }
+        if(dados.isbn() != null)
+        {
+            book.get().setIsbn(dados.isbn());
+        }
+        if(dados.publicationDate() != null) {
+            book.get().setPublicationDate(dados.publicationDate());
+        }
+        if(dados.publicationDate() != null) {
+            book.get().setPublicationDate(dados.publicationDate());
+        }
+        if (dados.title() != null)
+        {
+            book.get().setTitle(dados.title());
+        }
+
+        return repository.save(book.get());
+    }
+
 
     public BookGetRequestDto ToDto(Book book) {
         LiteraryGenre literaryGenre = getLiteraryGenreByBookItemFk(book.getLiteraryGenre().getId());
@@ -79,6 +124,17 @@ public class BookService {
         );
     }
 
+    public BookUpdateDto ToBookUpdateDto(Book book) {
+        return new BookUpdateDto(
+                book.getId(),
+                book.getIsbn(),
+                book.getLiteraryGenre().getId(),
+                book.getPublisherProvider().getId(),
+                book.getPublicationDate(),
+                book.getTitle()
+        );
+    }
+
     public List<BookGetRequestDto> findAll() {
         List<BookGetRequestDto> booksresponse = new ArrayList<>();
 
@@ -88,4 +144,37 @@ public class BookService {
         }
         return booksresponse;
     }
+    public BookGetRequestDto getbookById(Integer id) {
+        BookGetRequestDto booksresponse = null;
+        Optional<Book> book = repository.findById(id);
+        if (book.isPresent()) {
+            booksresponse = ToDto(book.get());
+        }
+
+        return booksresponse;
+    }
+    public BookUpdateDto getdeletebookById(Integer id) {
+        BookUpdateDto booksresponse = null;
+        Optional<Book> book = repository.findById(id);
+        if (book.isPresent()) {
+            booksresponse = ToBookUpdateDto(book.get());
+        }
+
+        return booksresponse;
+    }
+
+    public void deleteById(Integer id) {
+        repository.deleteById(id);
+    }
+
+    public BookUpdateDto desativar(Integer id) {
+        Optional<Book> book =getReferenceById(id);
+        if (book.isEmpty()) {
+            throw new EntityNotFoundException("Book not found");
+        }
+        book.get().setActive(!book.get().getActive());
+        return ToBookUpdateDto(repository.save(book.get()));
+
+    }
+
 }

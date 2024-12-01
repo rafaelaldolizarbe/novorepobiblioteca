@@ -66,12 +66,12 @@ public class AutorController  {
     }
 
     @GetMapping("/ordenado") // Neste exemplo usa-se o @PageableDefault para ordenar por nome. Ele é uma anotação que serve para definir valores padrão para a paginação.
-    public Page<AutorConsultaDto> buscar(@PageableDefault(sort = {"nome"}) Pageable paginacao){
+    public Page<AutorConsultaDto> buscar(@PageableDefault(sort = {"first_name"}) Pageable paginacao){
         return repository.findAll(paginacao).map(AutorConsultaDto::new);
     }
     @PutMapping
     @Transactional
-    public ResponseEntity atualizar(@RequestBody @Valid AutorAtualizacaoDto dados){
+    public ResponseEntity<?> atualizar(@RequestBody @Valid AutorAtualizacaoDto dados){
         Autor autor = repository.getReferenceById(dados.id());
         autor.atualizar(dados);
         return ResponseEntity.ok(new AutorDetalhamentoDto(autor));
@@ -79,14 +79,14 @@ public class AutorController  {
     }
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity excluir(@PathVariable Long id){
+    public ResponseEntity<?> excluir(@PathVariable Long id){
         repository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/logico/{id}")
     @Transactional
-    public ResponseEntity desativar(@PathVariable Long id){
+    public ResponseEntity<?> desativar(@PathVariable Long id){
         Autor autor = repository.getReferenceById(id);
         autor.desativar();
         return ResponseEntity.noContent().build();
