@@ -15,6 +15,7 @@ public record WriterResponseDto(
         String description,
 
         Boolean active
+        
 ) {
 
     public WriterResponseDto(Writer writer) {

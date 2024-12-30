@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import thelibrary.api.biblioteca.dto.book.BookGetRequestDto;
 import thelibrary.api.biblioteca.dto.book.BookUpdateDto;
+import thelibrary.api.biblioteca.dto.book.BookWithWritersDto;
 import thelibrary.api.biblioteca.dto.literaryGenre.LiteraryGenreResponseDto;
 import thelibrary.api.biblioteca.dto.publisherProvider.PublisherProviderResponseDto;
+import thelibrary.api.biblioteca.dto.writer.WriterResponseDto;
 import thelibrary.api.biblioteca.entity.Book;
 import thelibrary.api.biblioteca.dto.book.BookRequest;
 import thelibrary.api.biblioteca.entity.LiteraryGenre;
@@ -17,10 +19,12 @@ import thelibrary.api.biblioteca.entity.Writer;
 import thelibrary.api.biblioteca.repository.book.BookRepository;
 import thelibrary.api.biblioteca.repository.literaryGenre.LiteraryGenreRepository;
 import thelibrary.api.biblioteca.repository.publisherProvider.PublisherRepository;
+import thelibrary.api.biblioteca.repository.writer.WriterRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +36,16 @@ public class BookService {
     private final LiteraryGenreRepository literaryGenreRepository;
 
     private final PublisherRepository publisherRepository;
+
+    private final WriterRepository writerRepository;
+
+    public List<Writer> getWriterByBookItemFk(List<Integer> fk) {
+        List<Writer> listofwriters = writerRepository.findAllById(fk);
+//        if (listofwriters.isEmpty()) {
+//            throw new EntityNotFoundException("Writer not found");
+//        }
+        return listofwriters;
+    }
 
     public LiteraryGenre getLiteraryGenreByBookItemFk(Integer fk) {
         return literaryGenreRepository.findById(fk).orElseThrow(() -> new EntityNotFoundException("Literary Genre not found"));
@@ -63,6 +77,43 @@ public class BookService {
             throw new EntityNotFoundException("Book not found");
         }
         return repository.findById(id);
+    }
+
+    public BookWithWritersDto getBookWithWritersById(Integer id) {
+
+        Optional<Book> book = getReferenceById(id);
+        if (book.isEmpty()) {
+            throw new EntityNotFoundException("Book not found");
+
+        }
+//        É necessário fazer um laço for para trazer os escritores do livro.
+
+        List<Writer> writer = getWriterByBookItemFk(book.get().getWriters().stream().map(Writer::getId).collect(Collectors.toList()));
+        List<WriterResponseDto> listOfWriters = writer.stream().map(WriterResponseDto::new).toList();
+        LiteraryGenre literaryGenre = getLiteraryGenreByBookItemFk(book.get().getLiteraryGenre().getId());
+        LiteraryGenreResponseDto genredto = null;
+        PublisherProvider publisherProvider = getPublisherProviderByBookItemFk(book.get().getPublisherProvider().getId());
+        PublisherProviderResponseDto publisherdto = null;
+        if (literaryGenre != null) {
+            genredto = LiteraryGenreResponseDto.builder()
+                    .id(literaryGenre.getId())
+                    .genre_name(literaryGenre.getGenreName())
+                    .build();
+        }
+        if(publisherProvider != null){
+            publisherdto = PublisherProviderResponseDto.builder()
+                    .id(publisherProvider.getId())
+                    .publisher_name(publisherProvider.getPublisherName())
+                    .build();
+        }
+        BookWithWritersDto bookWithWritersDto = new BookWithWritersDto(
+                book.get().getIsbn(),
+                genredto,
+                publisherdto,
+                book.get().getTitle(),
+                listOfWriters
+        );
+    return bookWithWritersDto;
     }
 
     public Book atualizar(BookUpdateDto dados) {

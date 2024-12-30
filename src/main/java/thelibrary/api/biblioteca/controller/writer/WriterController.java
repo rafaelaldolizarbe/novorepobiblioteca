@@ -12,6 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import thelibrary.api.biblioteca.dto.writer.WriterCreateRequestDto;
 import thelibrary.api.biblioteca.dto.writer.WriterRequestDto;
 import thelibrary.api.biblioteca.dto.writer.WriterResponseDto;
+import thelibrary.api.biblioteca.dto.writer.WriterWithBooksDto;
 import thelibrary.api.biblioteca.entity.Writer;
 import thelibrary.api.biblioteca.service.writer.WriterService;
 
@@ -44,11 +45,17 @@ public class WriterController {
     public ResponseEntity<List<Writer>> listar(){
 
         List<Writer> resposta=service.findAll();
-
         if(resposta.isEmpty()){
             return ResponseEntity.noContent().build();
         }
+
         return ResponseEntity.ok(resposta);
+    }
+
+    @GetMapping("writersWithBooks/{id}")
+    public ResponseEntity<WriterWithBooksDto> findWritersWithBooks(@PathVariable Integer id){
+        WriterWithBooksDto writer = service.findWritersWithBooks(id);
+        return ResponseEntity.ok(writer);
     }
     @GetMapping("/{id}")
     public ResponseEntity<WriterResponseDto> detalhar(@PathVariable Integer id){

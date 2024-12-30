@@ -11,6 +11,7 @@ import thelibrary.api.biblioteca.dto.autor.AutorAtualizacaoDto;
 import thelibrary.api.biblioteca.dto.autor.AutorDetalhamentoDto;
 import thelibrary.api.biblioteca.dto.book.BookGetRequestDto;
 import thelibrary.api.biblioteca.dto.book.BookUpdateDto;
+import thelibrary.api.biblioteca.dto.book.BookWithWritersDto;
 import thelibrary.api.biblioteca.entity.Autor;
 import thelibrary.api.biblioteca.entity.Book;
 import thelibrary.api.biblioteca.dto.book.BookRequest;
@@ -48,6 +49,14 @@ public class BookController {
         List<BookGetRequestDto> books = bookservice.findAll();
 
         return ResponseEntity.ok(books);
+    }
+    @GetMapping("/withwriters/{id}")
+    public ResponseEntity<BookWithWritersDto> getBookWithWritersById(@PathVariable Integer id){
+        BookWithWritersDto book = bookservice.getBookWithWritersById(id);
+        if (book == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(book);
     }
     @GetMapping("/{id}")
     public ResponseEntity<BookGetRequestDto> detalhar(@PathVariable Integer id){
