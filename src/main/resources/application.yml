@@ -1,13 +1,13 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost/my_library
-    username: root
-    password: root
+    url: jdbc:mysql://${MYSQL_HOST:localhost}/${MYSQL_DATABASE:my_library}
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:root}
 #    driver-class-name: com.mysql.cj.jdbc.Driver
 logging:
   level:
     org:
-      flywaydb: DEBUG
+      flywaydb: ${FLYWAY_LOG_LEVEL:DEBUG}
 #  flyway:
 #    enabled: false
 
@@ -26,10 +26,10 @@ server:
 application:
   security:
     jwt:
-      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
-      expiration: 86400000 # a day
+      secret-key: ${JWT_SECRET_KEY:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
+      expiration: ${JWT_EXPIRATION:86400000} # a day
       refresh-token:
-        expiration: 604800000 # 7 days
+        expiration: ${JWT_REFRESH_EXPIRATION:604800000} # 7 days
 # Caso seja necessário mudar os parâmetros que serão usados pelo FrontEnd, cabe aqui modificar o nome que será usado pelo cliente HTTP
 # data:
 #   web:
