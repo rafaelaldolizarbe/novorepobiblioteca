@@ -1,3 +1,2 @@
-ALTER TABLE autor ADD COLUMN ativo TINYINT;
-
-UPDATE autor SET ativo = 1;
+ALTER TABLE autor
+ADD COLUMN ativo BIT(1) NOT NULL DEFAULT b'1';

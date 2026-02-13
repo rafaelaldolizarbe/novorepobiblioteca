@@ -7,7 +7,7 @@ import thelibrary.api.biblioteca.entity.Writer;
 import java.time.LocalDate;
 @Builder
 public record WriterResponseDto(
-        Integer id,
+
         String firstName,
         String lastName,
         LocalDate birthDate,
@@ -19,7 +19,7 @@ public record WriterResponseDto(
 ) {
 
     public WriterResponseDto(Writer writer) {
-        this(writer.getId(), writer.getFirstName(), writer.getLastName(), writer.getBirthDate(), writer.getDeathDate(), writer.getDescription(),writer.getActive());
+        this( writer.getFirstName(), writer.getLastName(), writer.getBirthDate(), writer.getDeathDate(), writer.getDescription(),writer.getActive());
     }
 
 

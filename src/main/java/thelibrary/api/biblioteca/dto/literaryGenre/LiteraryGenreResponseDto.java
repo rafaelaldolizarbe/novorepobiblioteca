@@ -4,7 +4,6 @@ import lombok.Builder;
 
 @Builder
 public record LiteraryGenreResponseDto(
-        Integer id,
         String genre_name
 ) {
 }

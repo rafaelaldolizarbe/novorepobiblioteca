@@ -3,6 +3,13 @@ spring:
     url: jdbc:mysql://${MYSQL_HOST:localhost}/${MYSQL_DATABASE:my_library}
     username: ${MYSQL_USER:root}
     password: ${MYSQL_PASSWORD:root}
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: ${JPA_HIBERNATE_DDL_AUTO:validate}
+    properties:
+      hibernate:
+        format-sql: true
 #    driver-class-name: com.mysql.cj.jdbc.Driver
 logging:
   level:

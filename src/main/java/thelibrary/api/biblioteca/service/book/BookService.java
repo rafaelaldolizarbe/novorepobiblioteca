@@ -96,13 +96,13 @@ public class BookService {
         PublisherProviderResponseDto publisherdto = null;
         if (literaryGenre != null) {
             genredto = LiteraryGenreResponseDto.builder()
-                    .id(literaryGenre.getId())
+
                     .genre_name(literaryGenre.getGenreName())
                     .build();
         }
         if(publisherProvider != null){
             publisherdto = PublisherProviderResponseDto.builder()
-                    .id(publisherProvider.getId())
+
                     .publisher_name(publisherProvider.getPublisherName())
                     .build();
         }
@@ -111,6 +111,7 @@ public class BookService {
                 genredto,
                 publisherdto,
                 book.get().getTitle(),
+                book.get().getPublicationDate(),
                 listOfWriters
         );
     return bookWithWritersDto;
@@ -156,13 +157,13 @@ public class BookService {
         PublisherProviderResponseDto publisherdto = null;
         if (literaryGenre != null) {
             genredto = LiteraryGenreResponseDto.builder()
-                    .id(literaryGenre.getId())
+
                     .genre_name(literaryGenre.getGenreName())
                     .build();
         }
         if(publisherProvider != null){
             publisherdto = PublisherProviderResponseDto.builder()
-                    .id(publisherProvider.getId())
+
                     .publisher_name(publisherProvider.getPublisherName())
                     .build();
         }
@@ -185,8 +186,10 @@ public class BookService {
                 book.getTitle()
         );
     }
-
-    public List<BookGetRequestDto> findAll() {
+    public List<Book> findAll() {
+        return repository.findAll();
+    }
+    public List<BookGetRequestDto> findAllBooksDto() {
         List<BookGetRequestDto> booksresponse = new ArrayList<>();
 
         List<Book> books = repository.findAll();

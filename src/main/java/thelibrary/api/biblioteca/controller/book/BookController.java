@@ -46,9 +46,20 @@ public class BookController {
 
     @GetMapping
     public ResponseEntity<List<BookGetRequestDto>> findAllBooks() {
-        List<BookGetRequestDto> books = bookservice.findAll();
+        List<BookGetRequestDto> books = bookservice.findAllBooksDto();
 
         return ResponseEntity.ok(books);
+    }
+    @GetMapping("/withwriter")
+    public ResponseEntity<List<BookWithWritersDto>> getBookWithWriters(){
+        List<Book> books = bookservice.findAll();
+        List<BookWithWritersDto> booksWithWriters = books.stream()
+                .map(book -> bookservice.getBookWithWritersById(book.getId()))
+                .toList();
+        if (booksWithWriters.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(booksWithWriters);
     }
     @GetMapping("/withwriters/{id}")
     public ResponseEntity<BookWithWritersDto> getBookWithWritersById(@PathVariable Integer id){

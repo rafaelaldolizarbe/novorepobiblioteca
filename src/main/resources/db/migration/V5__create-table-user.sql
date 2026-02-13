@@ -5,8 +5,7 @@ CREATE TABLE IF NOT EXISTS _user
     firstname VARCHAR(255) NOT NULL,
     lastname VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    role VARCHAR(255) NOT NULL,
-    CONSTRAINT check_role CHECK (role IN ('USER', 'ADMIN', 'MANAGER'))
+    role ENUM('USER','ADMIN','MANAGER') NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS token
