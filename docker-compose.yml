@@ -1,11 +1,27 @@
 services:
-  library:
+  mysql-db:
     image: mysql:8
     container_name: library
+    restart: unless-stopped
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: my_library
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
-      - /your/volum/directory:/var/lib/mysql
+      - ${LOCAL_VOLUM_DIR}:/var/lib/mysql
+  api:
+    build: .
+    container_name: minha-api
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS}
+    depends_on:
+      - mysql-db
